@@ -7,128 +7,236 @@
 <style>
   body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 30px;
-    background: #f7f7f7;
+    margin: 24px;
+    background: #f6f7f9;
   }
 
-  h1 {
+  h1 { margin-bottom: 6px; }
+
+  .controls {
     margin-bottom: 10px;
   }
 
+  button {
+    margin-right: 6px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  button.active {
+    background: #2c7be5;
+    color: white;
+    border-color: #2c7be5;
+  }
+
   .gantt {
-    background: white;
+    background: #fff;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 16px;
     overflow-x: auto;
+    position: relative;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    row-gap: 10px;
+  }
+
+  .labels {
+    display: grid;
+    grid-auto-rows: 32px;
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .timeline {
-    display: grid;
-    grid-template-columns: 220px repeat(24, 1fr);
-    gap: 4px;
+    position: relative;
   }
 
-  .header {
-    font-weight: bold;
-    text-align: center;
-    font-size: 12px;
-  }
-
-  .project {
-    display: contents;
-  }
-
-  .label {
-    font-weight: bold;
-    font-size: 13px;
-    padding-right: 10px;
-    white-space: nowrap;
+  .row {
+    position: relative;
+    height: 32px;
+    border-bottom: 1px solid #eee;
   }
 
   .bar {
+    position: absolute;
+    top: 5px;
     height: 22px;
     border-radius: 4px;
-    background: #2c7be5;
+    cursor: pointer;
   }
 
-  .tbc {
-    background: #aaa;
+  .Dining { background: #2c7be5; }
+  .Hotel { background: #28a745; }
+  .Gaming { background: #6f42c1; }
+  .Entertainment { background: #fd7e14; }
+  .tbc { background: #9e9e9e; }
+
+  .tooltip {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 6px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+    display: none;
   }
 
-  .cell {
+  .axis {
+    display: flex;
+    font-size: 11px;
+    margin-left: 260px;
+    margin-bottom: 6px;
+  }
+
+  .axis div {
+    flex: 1;
+    text-align: center;
     border-left: 1px solid #eee;
+    padding: 2px 0;
+  }
+
+  .today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: red;
+    z-index: 2;
   }
 </style>
 </head>
 
 <body>
 
-<h1>Construction Timeline (Gantt)</h1>
-<p>Indicative construction windows – FY26–FY27</p>
+<h1>Construction Timeline</h1>
+<p>Construction Gantt with FY filter, categories and live timeline</p>
 
-<div class="gantt">
-  <div class="timeline">
+<div class="controls">
+  <button onclick="setFY('ALL')" class="active">All</button>
+  <button onclick="setFY('FY26')">FY26</button>
+  <button onclick="setFY('FY27')">FY27</button>
+</div>
 
-    <!-- Header -->
-    <div></div>
-    <div class="header">Jan‑26</div><div class="header">Feb‑26</div><div class="header">Mar‑26</div>
-    <div class="header">Apr‑26</div><div class="header">May‑26</div><div class="header">Jun‑26</div>
-    <div class="header">Jul‑26</div><div class="header">Aug‑26</div><div class="header">Sep‑26</div>
-    <div class="header">Oct‑26</div><div class="header">Nov‑26</div><div class="header">Dec‑26</div>
-    <div class="header">Jan‑27</div><div class="header">Feb‑27</div><div class="header">Mar‑27</div>
-    <div class="header">Apr‑27</div><div class="header">May‑27</div><div class="header">Jun‑27</div>
-    <div class="header">Jul‑27</div><div class="header">Aug‑27</div><div class="header">Sep‑27</div>
-    <div class="header">Oct‑27</div><div class="header">Nov‑27</div><div class="header">Dec‑27</div>
+<div class="axis" id="axis"></div>
 
-    <!-- Projects -->
-
-    <div class="project">
-      <div class="label">L28 Skybar</div>
-      <div></div><div class="bar" style="grid-column:2 / 4;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Food Court Entrance</div>
-      <div></div><div class="bar" style="grid-column:4 / 7;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Alehouse</div>
-      <div></div><div class="bar" style="grid-column:5 / 8;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Mott 32</div>
-      <div></div><div class="bar" style="grid-column:3 / 11;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Palms Theatre</div>
-      <div></div><div class="bar" style="grid-column:2 / 10;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Victor Churchill</div>
-      <div></div><div class="bar" style="grid-column:9 / 15;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">Ski Lodge</div>
-      <div></div><div class="bar" style="grid-column:11 / 15;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">King Pin</div>
-      <div></div><div class="bar" style="grid-column:16 / 20;"></div>
-    </div>
-
-    <div class="project">
-      <div class="label">B2 Poker (TBC)</div>
-      <div></div><div class="bar tbc" style="grid-column:2 / 4;"></div>
-    </div>
-
+<div class="gantt" id="gantt">
+  <div class="today-line" id="todayLine"></div>
+  <div class="grid">
+    <div class="labels" id="labels"></div>
+    <div class="timeline" id="timeline"></div>
   </div>
 </div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+/* ---------- DATA ---------- */
+const projects = [
+  { name:"L28 Skybar", cat:"Hotel", start:"2026-02-01", end:"2026-04-30", fy:["FY26"] },
+  { name:"Food Court Entrance", cat:"Dining", start:"2026-04-01", end:"2026-06-30", fy:["FY26"] },
+  { name:"Alehouse", cat:"Dining", start:"2026-05-01", end:"2026-07-31", fy:["FY26"] },
+  { name:"Mott 32", cat:"Dining", start:"2026-03-01", end:"2026-10-31", fy:["FY26"] },
+  { name:"Echostate", cat:"Entertainment", start:"2026-05-01", end:"2026-10-31", fy:["FY26"] },
+  { name:"Palms Theatre", cat:"Entertainment", start:"2026-02-01", end:"2026-09-30", fy:["FY26"] },
+  { name:"Victor Churchill", cat:"Dining", start:"2026-09-01", end:"2027-03-31", fy:["FY26","FY27"] },
+  { name:"Ski Lodge", cat:"Hotel", start:"2026-11-01", end:"2027-03-31", fy:["FY26","FY27"] },
+  { name:"L39 Premium Gaming", cat:"Gaming", start:"2026-09-01", end:"2027-01-31", fy:["FY26","FY27"] },
+  { name:"King Pin", cat:"Entertainment", start:"2027-04-01", end:"2027-07-31", fy:["FY27"] },
+  { name:"Amaya", cat:"Dining", start:"2027-05-01", end:"2027-10-31", fy:["FY27"] },
+  { name:"Akira Black", cat:"Dining", start:"2027-05-01", end:"2027-08-31", fy:["FY27"] },
+  { name:"L1 Mahogany Lounge", cat:"Hotel", start:"2027-06-01", end:"2027-10-31", fy:["FY27"] },
+  { name:"B2 Poker (TBC)", cat:"Gaming", tbc:true, fy:["ALL"] }
+];
+
+/* ---------- GLOBALS ---------- */
+const startDate = new Date("2026-01-01");
+const endDate = new Date("2027-12-31");
+const totalMs = endDate - startDate;
+let currentFY = "ALL";
+
+/* ---------- BUILD AXIS ---------- */
+const axis = document.getElementById("axis");
+let d = new Date(startDate);
+while (d <= endDate) {
+  const div = document.createElement("div");
+  div.textContent = d.toLocaleString("en-AU",{month:"short",year:"2-digit"});
+  axis.appendChild(div);
+  d.setMonth(d.getMonth()+1);
+}
+
+/* ---------- TODAY LINE ---------- */
+const today = new Date();
+if (today >= startDate && today <= endDate) {
+  const pct = ((today - startDate) / totalMs) * 100;
+  document.getElementById("todayLine").style.left = `calc(260px + ${pct}%)`;
+}
+
+/* ---------- TOOLTIP ---------- */
+const tooltip = document.getElementById("tooltip");
+
+/* ---------- RENDER ---------- */
+function render() {
+  const labels = document.getElementById("labels");
+  const timeline = document.getElementById("timeline");
+  labels.innerHTML = "";
+  timeline.innerHTML = "";
+
+  projects.filter(p =>
+    currentFY === "ALL" || p.fy.includes(currentFY)
+  ).forEach(p => {
+
+    const label = document.createElement("div");
+    label.textContent = p.name;
+    labels.appendChild(label);
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    if (!p.tbc) {
+      const s = new Date(p.start);
+      const e = new Date(p.end);
+      const left = ((s - startDate) / totalMs) * 100;
+      const width = ((e - s) / totalMs) * 100;
+
+      const bar = document.createElement("div");
+      bar.className = `bar ${p.cat}`;
+      bar.style.left = `${left}%`;
+      bar.style.width = `${width}%`;
+
+      bar.onmousemove = e => {
+        tooltip.style.display = "block";
+        tooltip.style.left = e.pageX + 12 + "px";
+        tooltip.style.top = e.pageY - 12 + "px";
+        tooltip.innerHTML = `<strong>${p.name}</strong><br>
+          Start: ${p.start}<br>End: ${p.end}`;
+      };
+      bar.onmouseleave = () => tooltip.style.display = "none";
+
+      row.appendChild(bar);
+    }
+
+    timeline.appendChild(row);
+  });
+}
+
+/* ---------- FY TOGGLE ---------- */
+function setFY(fy) {
+  currentFY = fy;
+  document.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+  render();
+}
+
+render();
+</script>
 
 </body>
 </html>
