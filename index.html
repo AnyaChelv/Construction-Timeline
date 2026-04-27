@@ -2,42 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Crown Melbourne Projects – Construction Dashboard</title>
+<title>Crown Melbourne – Construction Gantt</title>
+
 <style>
-body { font-family: Arial, Helvetica, sans-serif; margin: 40px; background:#f7f7f7; }
-h1 { color:#333; }
-table { border-collapse: collapse; width: 100%; background:white; }
-th, td { padding: 12px 10px; border: 1px solid #ccc; text-align: left; }
-th { background: #2c3e50; color: white; }
-tr:nth-child(even) { background:#f2f2f2; }
-.badge { padding:4px 8px; border-radius:4px; font-size:0.9em; }
-.tbc { background:#999; color:white; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 30px;
+    background: #f7f7f7;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .gantt {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 220px repeat(24, 1fr);
+    gap: 4px;
+  }
+
+  .header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .project {
+    display: contents;
+  }
+
+  .label {
+    font-weight: bold;
+    font-size: 13px;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .bar {
+    height: 22px;
+    border-radius: 4px;
+    background: #2c7be5;
+  }
+
+  .tbc {
+    background: #aaa;
+  }
+
+  .cell {
+    border-left: 1px solid #eee;
+  }
 </style>
 </head>
+
 <body>
-<h1>Crown Melbourne – Construction Projects Dashboard</h1>
-<p>Construction start and end dates extracted from FY27 Disruption documentation.</p>
-<table>
-<thead>
-<tr><th>Project Name</th><th>Construction Start</th><th>Construction End</th></tr>
-</thead>
-<tbody>
-<tr><td>B2 Poker</td><td><span class="badge tbc">TBC</span></td><td><span class="badge tbc">TBC</span></td></tr>
-<tr><td>Ski Lodge</td><td>Nov 2026</td><td>Mar 2027</td></tr>
-<tr><td>Food Court Entrance + 1 Tenancy</td><td>Apr 2026</td><td>Jun 2026</td></tr>
-<tr><td>King Pin</td><td>Apr 2027</td><td>Jul 2027</td></tr>
-<tr><td>Alehouse</td><td>May 2026</td><td>Jul 2026</td></tr>
-<tr><td>Brunetti</td><td>Oct 2026</td><td>Feb 2027</td></tr>
-<tr><td>Amaya</td><td>May 2027</td><td>Oct 2027</td></tr>
-<tr><td>Akira Black</td><td>May 2027</td><td>Aug 2027</td></tr>
-<tr><td>Mott 32</td><td>Mar 2026</td><td>Oct 2026</td></tr>
-<tr><td>Echostate</td><td>May 2026</td><td>Oct 2026</td></tr>
-<tr><td>L1 Mahogany Lounge</td><td>Jun 2027</td><td>Oct 2027</td></tr>
-<tr><td>Palms Theatre</td><td>Feb 2026</td><td>Sept 2026</td></tr>
-<tr><td>Victor Churchill</td><td>Sept 2026</td><td>Mar 2027</td></tr>
-<tr><td>L28 Skybar</td><td>Feb 2026</td><td>Apr 2026</td></tr>
-<tr><td>L39 Premium Gaming</td><td>Sept 2026</td><td>Jan 2027</td></tr>
-</tbody>
-</table>
-</body>
-</html>
+
+<h1>Construction Timeline (Gantt)</h1>
+<p>Indicative construction windows – FY26–FY27</p>
+
+<div class="gantt">
+  <div class="timeline">
+
+    <!-- Header -->
+    <div></div>
+    <div class="header">Jan‑26</div><div class="header">Feb‑26</div><div class="header">Mar‑26</div>
+    <div class="header">Apr‑26</div><div class="header">May‑26</div><div class="header">Jun‑26</div>
+    <div class="header">Jul‑26</div><div class="header">Aug‑26</div><div class="header">Sep‑26</div>
+    <div class="header">Oct‑26</div><div class="header">Nov‑26</div><div class="header">Dec‑26</div>
+    <div class="header">Jan‑27</div><div class="header">Feb‑27</div><div class="header">Mar‑27</div>
+    <div class="header">Apr‑27</div><div class="header">May‑27</div><div class="header">Jun‑27</div>
+    <div class="header">Jul‑27</div><div class="header">Aug‑27</div><div class="header">Sep‑27</div>
+    <div class="header">Oct‑27</div><div class="header">Nov‑27</div><div class="header">Dec‑27</div>
+
+    <!-- Projects -->
+
+    <div class="project">
+      <div class="label">L28 Skybar</div>
+      <div></div><div class="bar" style="grid-column:2 / 4;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Food Court Entrance</div>
+      <div></div><div class="bar" style="grid-column:4 / 7;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Alehouse</div>
+      <div></div><div class="bar" style="grid-column:5 / 8;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Mott 32</div>
+      <div></div><div class="bar" style="grid-column:3 / 11;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Palms Theatre</div>
+      <div></div><div class="bar" style="grid-column:2 / 10;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Victor Churchill</div>
+      <div></div><div class="bar" style="grid-column:9 / 15;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">Ski Lodge</div>
+      <div></div><div class="bar" style="grid-column:11 / 15;"></div>
+    </div>
+
+    <div class="project">
+      <div class="label">King Pin</div>
